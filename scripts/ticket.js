@@ -30,8 +30,19 @@ function newTicket(){
 
     divTitle.appendChild(labelTitle);
     divTitle.appendChild(title);
-
-
+    
+    let divDate = document.createElement('div');
+    divDate.className='form-group';
+    let labelDate = document.createElement('label');
+    labelDate.className = 'form-group';
+    labelDate.innerHTML = 'Date';
+    labelDate.for = 'ticketDate';
+    let date = document.createElement("input");
+    date.type= 'text';
+    date.className ='form-control';
+    date.id ='ticketDate';
+    divDate.appendChild(labelDate);
+    divDate.appendChild(date);
 
     let divDepartment = document.createElement('div');
     divDepartment.className='form-group';
@@ -116,6 +127,7 @@ function newTicket(){
     div.appendChild(form);
     form.appendChild(divTitle);
     form.appendChild(divDepartment);
+    form.appendChild(divDate)
     form.appendChild(divPriority);
     form.appendChild(divMessage);
     form.appendChild(divSubmit);
@@ -150,7 +162,7 @@ function randomTableColor(){
 
 }
 
-function ticketSummary(ticketNumber,ticketTitle,ticketDepartment,ticketPriority){
+function ticketSummary(ticketNumber,ticketTitle,ticketDepartment,ticketPriority,ticketDate){
 
     let table = document.getElementById("ticketTableBody");
     let row = table.insertRow();
@@ -158,20 +170,26 @@ function ticketSummary(ticketNumber,ticketTitle,ticketDepartment,ticketPriority)
     let ticketNumberCell = row.insertCell(0);
     let ticketTitleCell = row.insertCell(1);
     let ticketDepartmentCell = row.insertCell(2);
-    let ticketPriorityCell = row.insertCell(3);
-    let ticketAction = row.insertCell(4);
+    let ticketDateCell = row.insertCell(3);
+    let ticketPriorityCell = row.insertCell(4);
+    let ticketAction = row.insertCell(5);
 
     ticketNumberCell.innerHTML = ticketNumber;
     ticketTitleCell.innerHTML = ticketTitle;
     ticketDepartmentCell.innerHTML = ticketDepartment;
     ticketPriorityCell.innerHTML = ticketPriority;
-    ticketAction.innerHTML= '<button class="btn-info">View Details</button>';
+    ticketDateCell.innerHTML = ticketDate;
+    ticketAction.innerHTML= '<button class="btn-info" onClick="createDiv()">View Details</button>';
 }
+
+
+
 function ticketSubmit(){
 
     let ticketNumber = generateTicketNumber();
     let ticketTitle = document.getElementById("ticketName").value;
     let ticketDepartment = document.getElementById("choseDpt").value;
+    let ticketDate = document.getElementById("ticketDate").value;
     let ticketPriority = document.getElementById("chosePriority").value;
     let ticketProblemDetails = document.getElementById("inputText").value;
 
@@ -180,6 +198,7 @@ function ticketSubmit(){
         ticketNumber:ticketNumber,
         title : ticketTitle,
         department :ticketDepartment,
+        date : ticketDate,
         priority :ticketPriority,
         details :ticketProblemDetails,
     };
@@ -189,13 +208,13 @@ function ticketSubmit(){
 
     localStorage.ticketRecord = JSON.stringify(ticketsArray);
 
-    ticketSummary(ticketNumber,ticketTitle,ticketDepartment,ticketPriority);
+    ticketSummary(ticketNumber,ticketTitle,ticketDepartment, ticketDate, ticketPriority);
     let newOuterDiv = document.getElementById("outerDiv");
     newOuterDiv.style.color = "red";
     newOuterDiv.innerHTML = "<h1>Submitted!!</h1>"
 
 
-    //document.getElementById('newTicketForm').reset();
+    document.getElementById('newTicketForm').reset();
 }
 
 function resetNewTicketDiv(){
@@ -214,29 +233,34 @@ function init(){
            let ticketRecord = (JSON.stringify(item.val()));
            let records = JSON.parse(ticketRecord);
           ticketsArray.push(records);
-            ticketSummary(item.val().ticketNumber, item.val().title, item.val().department, item.val().priority);
+            ticketSummary(item.val().ticketNumber, item.val().title, item.val().department, item.val().date, item.val().priority);
         })
 
     });
 }
 
-/**function loadSummary(){
+function loadSummary(){
     for (let i = 0; i < ticketsArray.length; i++) {
-        ticketSummary(ticketsArray[i].ticketNumber, ticketsArray[i].title, ticketsArray[i].department, ticketsArray[i].priority, ticketsArray[i].customerName);
+        ticketSummary(ticketsArray[i].ticketNumber, ticketsArray[i].title, ticketsArray[i].department, ticketsArray[i].date, ticketsArray[i].priority);
     }
 }
 
 
-/**function summaryTicket(){
+function summaryTicket(){
 
     loadTicketSummary();
 
     for (let i = 0; i < ticketsArray.length; i++){
-        ticketSummary(ticketsArray[i].ticketNumber, ticketsArray[i].title, ticketsArray[i].department, ticketsArray[i].priority, ticketsArray[i].customerName);
+        ticketSummary(ticketsArray[i].ticketNumber, ticketsArray[i].title, ticketsArray[i].department, ticketsArray[i].date, ticketsArray[i].priority);
     }
-}**/
+}
 
-
+function createDiv() {
+    let div = document.createElement('div');
+    div.className = "getText";
+    div.innerHTML = ticketSummary
+    document.body.appendChild(div);
+}
 
 
 
