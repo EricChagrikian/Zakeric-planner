@@ -34,12 +34,12 @@ function register(){
 function init() {
     if(localStorage.userRecord) {
         detailsArray = JSON.parse(localStorage.userRecord);
-        /**for(let i = 0; i< detailsArray.length; i++){
+        for(let i = 0; i< detailsArray.length; i++){
             let fullName = detailsArray[i].fullname;
             let userName = detailsArray[i].username;
             let userEmail = detailsArray[i].useremail;
             let userPassword = detailsArray[i].userpassword;
-        }**/
+        }
     }
 }
 
@@ -65,7 +65,7 @@ function login(){
 }
 
 
-/**function welcome(){
+function welcome(){
 
     let display = localStorage.getItem('curUser').toUpperCase();
        let welcomeText = document.getElementById("headerTicket");
@@ -73,6 +73,6 @@ function login(){
        welcomeText.style.color='olive';
        welcomeText.class="text-primary";
        welcomeText.innerHTML ="Logged In:    "+ display
-}**/
+}
 
 

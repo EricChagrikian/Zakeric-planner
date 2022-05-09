@@ -31,26 +31,12 @@ function newTicket(){
     divTitle.appendChild(labelTitle);
     divTitle.appendChild(title);
 
-    let divEmail = document.createElement('div');
-    divEmail.className='form-group';
-    let labelEmail = document.createElement('label');
-    labelEmail.className = 'form-group';
-    labelEmail.innerHTML = 'Email';
-    labelEmail.for = 'ticketEmail';
-    labelEmail.innerHTML = 'Email';
-    let email= document.createElement("input");
-    email.type= 'email';
-    email.className ='form-control';
-    email.id = 'ticketEmail';
-
-    divEmail.appendChild(labelEmail);
-    divEmail.appendChild(email);
 
 
     let divDepartment = document.createElement('div');
     divDepartment.className='form-group';
     let labelDepartment = document.createElement('label');
-    labelDepartment.innerHTML = 'Department';
+    labelDepartment.innerHTML = 'Status';
     labelDepartment.for = 'choseDpt';
     let select = document.createElement('select');
     select.id ='choseDpt';
@@ -58,25 +44,17 @@ function newTicket(){
     let option = document.createElement('option');
     let option1 = document.createElement('option');
     let option2 = document.createElement('option');
-    let option3 = document.createElement('option');
-    let option4 = document.createElement('option');
-    option.value ='Sales';
-    option1.value = 'Accounting';
-    option3.value = 'External Client';
-    option4.value = 'Admin';
-    option2.value = 'Treasury';
-    option.innerHTML = 'Sales';
-    option1.innerHTML = 'Accounting';
-    option3.innerHTML = 'External Client';
-    option4.innerHTML = 'Admin';
-    option2.innerHTML = 'Treasury';
+    option.value ='To do';
+    option1.value = 'Doing';
+    option2.value = 'Done';
+    option.innerHTML = 'To do';
+    option1.innerHTML = 'Doing';
+    option2.innerHTML = 'Done';
     divDepartment.appendChild(labelDepartment);
     divDepartment.appendChild(select);
     select.appendChild(option);
     select.appendChild(option1);
     select.appendChild(option2);
-    select.appendChild(option3);
-    select.appendChild(option4);
 
 
     let divPriority = document.createElement('div');
@@ -124,31 +102,6 @@ function newTicket(){
     divMessage.appendChild(labelMessage);
     divMessage.appendChild(messageText);
 
-    let divPhoneContact = document.createElement('div');
-    divPhoneContact.className='form-group';
-    let labelPhone = document.createElement('label');
-    labelPhone.className = 'form-group';
-    labelPhone.innerHTML = 'Contact Phone';
-    labelPhone.for = 'ticketContact';
-    let contactInput = document.createElement("input");
-    contactInput.type= 'text';
-    contactInput.className ='form-control';
-    contactInput.id = 'ticketContact';
-    divPhoneContact.appendChild(labelPhone);
-    divPhoneContact.appendChild(contactInput);
-
-    let divCustomer = document.createElement('div');
-    divCustomer.className ='form-group';
-    let labelCustomer = document.createElement('label');
-    labelCustomer.className = 'form-group';
-    labelCustomer.innerHTML ='Customer Name';
-    labelCustomer.for = 'customerName';
-    let customerName = document.createElement("input");
-    customerName.type= 'text';
-    customerName.className = 'form-control';
-    customerName.id = 'customerName';
-    divCustomer.appendChild(labelCustomer);
-    divCustomer.appendChild(customerName);
 
     let divStatus = document.createElement('div');
     divStatus.id = 'status';
@@ -162,12 +115,9 @@ function newTicket(){
     outerDiv.appendChild(div);
     div.appendChild(form);
     form.appendChild(divTitle);
-    form.appendChild(divEmail);
     form.appendChild(divDepartment);
     form.appendChild(divPriority);
     form.appendChild(divMessage);
-    form.appendChild(divPhoneContact);
-    form.appendChild(divCustomer);
     form.appendChild(divSubmit);
     form.appendChild(divStatus);
     document.body.appendChild(outerDiv);
@@ -200,7 +150,7 @@ function randomTableColor(){
 
 }
 
-function ticketSummary(ticketNumber,ticketTitle,ticketDepartment,ticketPriority,ticketCustomerName){
+function ticketSummary(ticketNumber,ticketTitle,ticketDepartment,ticketPriority){
 
     let table = document.getElementById("ticketTableBody");
     let row = table.insertRow();
@@ -209,45 +159,37 @@ function ticketSummary(ticketNumber,ticketTitle,ticketDepartment,ticketPriority,
     let ticketTitleCell = row.insertCell(1);
     let ticketDepartmentCell = row.insertCell(2);
     let ticketPriorityCell = row.insertCell(3);
-    let ticketCustomerCell = row.insertCell(4);
-    let ticketAction = row.insertCell(5);
+    let ticketAction = row.insertCell(4);
 
     ticketNumberCell.innerHTML = ticketNumber;
     ticketTitleCell.innerHTML = ticketTitle;
     ticketDepartmentCell.innerHTML = ticketDepartment;
     ticketPriorityCell.innerHTML = ticketPriority;
-    ticketCustomerCell.innerHTML = ticketCustomerName;
     ticketAction.innerHTML= '<button class="btn-info">View Details</button>';
 }
 function ticketSubmit(){
 
     let ticketNumber = generateTicketNumber();
     let ticketTitle = document.getElementById("ticketName").value;
-    let ticketEmail = document.getElementById("ticketEmail").value;
     let ticketDepartment = document.getElementById("choseDpt").value;
     let ticketPriority = document.getElementById("chosePriority").value;
     let ticketProblemDetails = document.getElementById("inputText").value;
-    let ticketPhoneNo = document.getElementById("ticketContact").value;
-    let ticketCustomerName = document.getElementById("customerName").value;
 
     let ticketDetails ={
 
         ticketNumber:ticketNumber,
         title : ticketTitle,
-        email :ticketEmail,
         department :ticketDepartment,
         priority :ticketPriority,
         details :ticketProblemDetails,
-        phone : ticketPhoneNo,
-        customerName :ticketCustomerName
     };
 
-    //ticketsArray.push(ticketDetails);
+    ticketsArray.push(ticketDetails);
        ref.push(ticketDetails);
 
-    //localStorage.ticketRecord = JSON.stringify(ticketsArray);
+    localStorage.ticketRecord = JSON.stringify(ticketsArray);
 
-    ticketSummary(ticketNumber,ticketTitle,ticketDepartment,ticketPriority,ticketCustomerName);
+    ticketSummary(ticketNumber,ticketTitle,ticketDepartment,ticketPriority);
     let newOuterDiv = document.getElementById("outerDiv");
     newOuterDiv.style.color = "red";
     newOuterDiv.innerHTML = "<h1>Submitted!!</h1>"
@@ -264,7 +206,7 @@ function resetNewTicketDiv(){
 
 }
 
-//function init(){
+function init(){
 
     ref.once('value',function(snapshot){
 
@@ -272,11 +214,11 @@ function resetNewTicketDiv(){
            let ticketRecord = (JSON.stringify(item.val()));
            let records = JSON.parse(ticketRecord);
           ticketsArray.push(records);
-            ticketSummary(item.val().ticketNumber, item.val().title, item.val().department, item.val().priority, item.val().customerName);
+            ticketSummary(item.val().ticketNumber, item.val().title, item.val().department, item.val().priority);
         })
 
     });
-//}
+}
 
 /**function loadSummary(){
     for (let i = 0; i < ticketsArray.length; i++) {
