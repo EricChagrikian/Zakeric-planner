@@ -179,8 +179,20 @@ function ticketSummary(ticketNumber,ticketTitle,ticketDepartment,ticketPriority,
     ticketDepartmentCell.innerHTML = ticketDepartment;
     ticketPriorityCell.innerHTML = ticketPriority;
     ticketDateCell.innerHTML = ticketDate;
-    ticketAction.innerHTML= '<button class="btn-info" onClick="createDiv()">View Details</button>';
+    ticketAction.innerHTML= '<button class="btn-info">View Details</button>';
+    let buttonDetails = document.getElementsByClassName("btn-info");
+    buttonDetails.createElement = onClick=createDiv();
+    function createDiv() {
+        let divDetails = document.getElementById("getText");
+        divDetails.className='container';
+        let div = document.createElement('div');
+        div.className = 'jumbotron';
+        div.style ="background-color:NavajoWhite";
+    }
 }
+
+
+
 
 
 
@@ -193,7 +205,9 @@ function ticketSubmit(){
     let ticketPriority = document.getElementById("chosePriority").value;
     let ticketProblemDetails = document.getElementById("inputText").value;
 
-    let ticketDetails ={
+
+    
+    const ticketDetails ={
 
         ticketNumber:ticketNumber,
         title : ticketTitle,
@@ -203,18 +217,17 @@ function ticketSubmit(){
         details :ticketProblemDetails,
     };
 
+    
     ticketsArray.push(ticketDetails);
        ref.push(ticketDetails);
 
     localStorage.ticketRecord = JSON.stringify(ticketsArray);
 
-    ticketSummary(ticketNumber,ticketTitle,ticketDepartment, ticketDate, ticketPriority);
+    ticketSummary(ticketNumber,ticketTitle,ticketDepartment, ticketDate, ticketPriority, ticketProblemDetails);
     let newOuterDiv = document.getElementById("outerDiv");
     newOuterDiv.style.color = "red";
     newOuterDiv.innerHTML = "<h1>Submitted!!</h1>"
-
-
-    document.getElementById('newTicketForm').reset();
+    
 }
 
 function resetNewTicketDiv(){
@@ -255,12 +268,6 @@ function summaryTicket(){
     }
 }
 
-function createDiv() {
-    let div = document.createElement('div');
-    div.className = "getText";
-    div.innerHTML = ticketSummary
-    document.body.appendChild(div);
-}
 
 
 
