@@ -51,6 +51,8 @@ sumbitTicket.addEventListener("click", () => {
   //Variables
   const issue = document.getElementById("mainIssue");
   const done = document.getElementById("statusDone");
+  const todo = document.getElementById("todo");
+  const doing = document.getElementById("doing");
   const employeeId = document.getElementById("employeeId");
   const details = document.getElementById("details");
   const severity = document.getElementById("severity");
@@ -92,8 +94,9 @@ sumbitTicket.addEventListener("click", () => {
     details.value
   );
 
-  //Add tickets to array
+  //Add tickets to array  
   tickets.push(ticket);
+  localStorage.ticketRecord = JSON.stringify(ticket);
 
   //Clear fields
   issue.value = "";
@@ -203,3 +206,16 @@ document.getElementById('startTimer').addEventListener('click', () => {
     }
   }, 1000);
 });
+
+function showMessage(){
+
+  var message = document.getElementById("mainIssue");
+  var message = document.getElementById("message").value;
+  var message = document.getElementById("message").value;
+  var message = document.getElementById("message").value;
+  var message = document.getElementById("message").value;
+  var message = document.getElementById("message").value;
+  var message = document.getElementById("message").value;
+  var message = document.getElementById("message").value;
+  display_message.innerHTML= message;
+}
