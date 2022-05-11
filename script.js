@@ -39,6 +39,8 @@ function generateTicketNumber(){
 
 }
 
+console.log(generateTicketNumber())
+
 function ticketSummary(ticketNumber,ticketTitle,ticketDepartment,ticketPriority,ticketDate){
 
     let table = document.getElementById("ticketTableBody");
@@ -60,6 +62,6 @@ function ticketSummary(ticketNumber,ticketTitle,ticketDepartment,ticketPriority,
 }
 
 
-console.log(ticketSummary());
+
 
 
