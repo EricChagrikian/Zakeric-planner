@@ -6,12 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="styles.css">
-    <title>&#128198;Project Planner</title>
+    <title>Planner</title>
 </head>
 <body>
     <header>
-        <img src="Logo.svg" alt="" class="logo">
+        <div class="logo">
+        <img src="/img/logo.svg" alt="">
+    </div>  
     </header>
+    <div id="tasktable">
+        <div id="taskheader">
+            <button class="btn" onclick="sortName(collection)"> Task</button>
+            <button class="btn"> Description</button>
+            <button class="btn" onclick="sortStatus(collection)"> Status</button>
+            <button class="btn" onclick="sortDate(collection)"> Date</button>
+        </div>
+        <div id="tasklist">
+        </div>
     
     <div class="createtask">
         <form> 
@@ -39,15 +50,7 @@
         </div>
         </form>
 
-    <div id="tasktable">
-        <div id="taskheader">
-            <button class="btn" onclick="sortName(collection)"> Task</button>
-            <button class="btn"> Description</button>
-            <button class="btn" onclick="sortStatus(collection)"> Status</button>
-            <button class="btn" onclick="sortDate(collection)"> Date</button>
-        </div>
-        <div id="tasklist">
-        </div>
+   
     </div>
 
         <div id="buttons">
