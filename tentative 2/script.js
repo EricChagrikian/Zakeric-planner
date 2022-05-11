@@ -92,8 +92,9 @@ sumbitTicket.addEventListener("click", () => {
     details.value
   );
 
-  //Add tickets to array
+  //Add tickets to array  
   tickets.push(ticket);
+  localStorage.ticketRecord = JSON.stringify(ticket);
 
   //Clear fields
   issue.value = "";
@@ -203,3 +204,16 @@ document.getElementById('startTimer').addEventListener('click', () => {
     }
   }, 1000);
 });
+
+function showMessage(){
+
+  var message = document.getElementById("mainIssue");
+  var message = document.getElementById("message").value;
+  var message = document.getElementById("message").value;
+  var message = document.getElementById("message").value;
+  var message = document.getElementById("message").value;
+  var message = document.getElementById("message").value;
+  var message = document.getElementById("message").value;
+  var message = document.getElementById("message").value;
+  display_message.innerHTML= message;
+}

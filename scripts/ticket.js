@@ -180,15 +180,6 @@ function ticketSummary(ticketNumber,ticketTitle,ticketDepartment,ticketPriority,
     ticketPriorityCell.innerHTML = ticketPriority;
     ticketDateCell.innerHTML = ticketDate;
     ticketAction.innerHTML= '<button class="btn-info">View Details</button>';
-    let buttonDetails = document.getElementsByClassName("btn-info");
-    buttonDetails.createElement = onClick=createDiv();
-    function createDiv() {
-        let divDetails = document.getElementById("getText");
-        divDetails.className='container';
-        let div = document.createElement('div');
-        div.className = 'jumbotron';
-        div.style ="background-color:NavajoWhite";
-    }
 }
 
 
