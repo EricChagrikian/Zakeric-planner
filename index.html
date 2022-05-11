@@ -13,6 +13,16 @@
         <img src="Logo.svg" alt="" class="logo">
     </header>
     
+    <div id="tasktable">
+        <div id="taskheader">
+            <button class="btn" onclick="sortName(collection)"> Task</button>
+            <button class="btn"> Description</button>
+            <button class="btn" onclick="sortStatus(collection)"> Status</button>
+            <button class="btn" onclick="sortDate(collection)"> Date</button>
+        </div>
+        <div id="tasklist">
+        </div>
+
     <div class="createtask">
         <form> 
         <div class="taskname">
@@ -39,15 +49,7 @@
         </div>
         </form>
 
-    <div id="tasktable">
-        <div id="taskheader">
-            <button class="btn" onclick="sortName(collection)"> Task</button>
-            <button class="btn"> Description</button>
-            <button class="btn" onclick="sortStatus(collection)"> Status</button>
-            <button class="btn" onclick="sortDate(collection)"> Date</button>
-        </div>
-        <div id="tasklist">
-        </div>
+
     </div>
 
         <div id="buttons">
