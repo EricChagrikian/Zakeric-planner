@@ -3,7 +3,7 @@
 body {
     margin: 41px;
     padding: 0;
-    background-color: #ffefb1;
+    background-color: #fff0b3;
     font-family: 'Inter', sans-serif;
 }
 
@@ -80,7 +80,7 @@ header {
 }
 
 .submit {
-    background-color: #92DF55;
+    background-color: #ffd15e;
     font-size: 1rem;
     border: none;
     width: 9rem;
@@ -98,12 +98,7 @@ header {
 /* TASK */
 #tasktable {
     background-color: #fff;
-    display: flex;
-    justify-content: center;
     margin-bottom: 1rem;
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
-    width: 90vw;
 }
 
 #tasktable p {
@@ -134,7 +129,6 @@ header {
 }
 
 #taskheader button:first-child {
-    border-top-left-radius: 50px;
     width: 20vw;
 }
 
@@ -155,7 +149,6 @@ header {
 }
 
 #taskheader button:last-child {
-    border-top-right-radius: 50px;
     width: 10vw;
 }
 
