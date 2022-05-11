@@ -29,7 +29,7 @@ header {
     margin-bottom: 3rem;
     display: flex;
     justify-content: center;
-    flex-wrap:wrap;
+
 }
 
 .createtask form {
@@ -48,11 +48,11 @@ header {
 }
 
 .createtask input{
-    padding: 10px;
+    padding: 5px;
     margin-bottom: 1rem;
 }
 .createtask select{
-    padding: 10px
+    padding: 5px
 }
 
 .taskname label {
@@ -60,7 +60,7 @@ header {
 }
 
 .taskname input {
-    width: 35rem;
+    width: 25rem;
 }
 
 .taskdesc label {
@@ -68,7 +68,7 @@ header {
 }
 
 .taskdesc input {
-    width: 35rem;
+    width: 25rem;
 }
 
 
@@ -85,8 +85,8 @@ header {
     background-color: #92DF55;
     font-size: rem;
     border: none;
-    width: 10rem;
-    height: 2.7rem;
+    width: 8rem;
+    height: 2.5rem;
     margin-top: 1.3rem;
     margin-left: 4rem;
 }
@@ -103,19 +103,19 @@ header {
     display: flex;
     justify-content: center;
     margin-bottom: 1rem;
-    width: 50vw;
+    margin-left: 5%;
 }
 
 #tasktable p {
     background-color: #C4C4C4;
     margin: 0.5rem;
     padding: 0.5rem;
-    font-size: 2rem;
+    font-size: 1rem;
 }
 
 /* TASK */
 #tasktable {
-    width: 90.9vw;
+    width: 88.9vw;
     display: flex;
     flex-direction: column; 
 }
@@ -143,7 +143,7 @@ header {
 }
 
 #taskheader button:nth-child(2) {
-    width: 50vw;
+    width: 48vw;
 }
 
 #taskheader button:nth-child(3) {
@@ -207,7 +207,7 @@ header {
 
 .reinit {
     width: 23vw;
-    margin-left: 10px;
+    margin-left: 5%;
     border-style: none;
     background-color: #D34040;
     font-size: 2rem;
