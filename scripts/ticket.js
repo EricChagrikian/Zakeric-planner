@@ -173,7 +173,6 @@ function ticketSummary(ticketNumber,ticketTitle,ticketDepartment,ticketPriority,
     let ticketDateCell = row.insertCell(3);
     let ticketPriorityCell = row.insertCell(4);
     let ticketAction = row.insertCell(5);
-
     ticketNumberCell.innerHTML = ticketNumber;
     ticketTitleCell.innerHTML = ticketTitle;
     ticketDepartmentCell.innerHTML = ticketDepartment;
