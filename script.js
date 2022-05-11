@@ -40,279 +40,143 @@
 // }
 
 
-let naame = document.querySelector('.named')
-let description = document.querySelector('.description')
-let date = document.querySelector('.date')
-let add = document.querySelector('.add')
-let remaining = document.querySelector('.remaining')
-let container = document.querySelector('.container')
-let select = document.querySelector('#select')
+let collection = JSON.parse(window.localStorage.getItem('collection'))
 
-let sortt = document.querySelector('.sort')
+function updateTask(inputArray, init=0) {
+  if(!init) document.getElementById("tasklist").innerHTML = ""
+  for (let index = 0; index < inputArray.length; index++) {
+    const element = inputArray[index];
+        let div = document.createElement("div")
+        div.className = "";
+        let task = document.createElement("P")
+        let taskname = document.createTextNode(element.Task)
+        task.appendChild(taskname)
+        div.appendChild(task)
 
-
-
-
-function addHtml(todo) {
-
-
-
-    let sectionchild = document.createElement('section')
-    sectionchild.classList.add('sectionchild')
-    container.appendChild(sectionchild)
-    sectionchild.id = todo.id
-
-
-    let div = document.createElement('div')
-    div.classList.add('div')
-    sectionchild.appendChild(div)
-
-    let all = document.createElement('div')
-    all.classList.add('all')
-    div.appendChild(all)
-
-
-
-
-    let doingcb = document.createElement('input')
-    doingcb.type = "checkbox"
-    doingcb.setAttribute('title', 'doing')
-    doingcb.checked = todo.doing
-    doingcb.setAttribute("name", "doing")
-    doingcb.classList.add('doing')
-    all.appendChild(doingcb)
-
-
-
-    let donecb = document.createElement('input')
-    donecb.type = "checkbox"
-    donecb.checked = todo.done
-    donecb.setAttribute("name", "done")
-    donecb.setAttribute('title', "done")
-    donecb.classList.add('done')
-    all.appendChild(donecb)
-
-    let h2 = document.createElement('h2')
-    h2.innerText = todo.name
-    all.appendChild(h2)
-    h2.className = "name"
-
-    let h3 = document.createElement('h3')
-    h3.innerText = todo.desc
-    div.appendChild(h3)
-
-    let h4 = document.createElement('h4');
-    h4.innerText = todo.date
-    div.appendChild(h4)
-
-    let h5 = document.createElement('h5');
-    h5.innerText = "in " + todo.remainingDate + " days";
-    h5.classList.add('remainingdate')
-    div.appendChild(h5)
-
-    let deletetodo = document.createElement('button')
-    deletetodo.classList.add('delete')
-    deletetodo.innerText = "delete"
-    sectionchild.appendChild(deletetodo)
-    //click event
-    doingcb.addEventListener('click', (e) => {
-
-
-        if (doingcb.checked) {
-            doingcb.classList.add('active')
-            donecb.checked = false
-            donecb.classList.remove('clicked')
-
-
-        } else {
-            doingcb.classList.remove('active')
-
-        }
-        let parent = e.target.parentElement;
-        let name = parent.children[2].textContent
-        console.log(name);
-        let todos = JSON.parse(localStorage.getItem('todos'));
-        todos.forEach(td => {
-            if (td.name === name) td.doing = !td.doing
-        });
-        todos.forEach(td => {
-            if (td.name === name&td.done===true) td.done =! td.done
-        })
-
-        localStorage.setItem('todos', JSON.stringify(todos))
-
-    })
-
-    donecb.addEventListener('click', (e) => {
-        if (donecb.checked) {
-            donecb.classList.add('clicked')
-             doingcb.checked = false
-            doingcb.classList.remove('active')
-
-        }
-         else {
-            donecb.classList.remove('clicked')
-        }
-        let parent = e.target.parentElement;
-        let name = parent.children[2].textContent
-        console.log(name);
-        let todos = JSON.parse(localStorage.getItem('todos'));
-        todos.forEach(td => {
-            if (td.name === name) td.done = !td.done
-        });
+        let description = document.createElement("P")
+        let desc = document.createTextNode(element.Description)
+        description.appendChild(desc)
+        div.appendChild(description)
         
-        todos.forEach(td => {
-            if (td.name === name&td.doing===true) td.doing =! td.doing
-        })
-       
+        let status = document.createElement("P")
+        let stat = document.createTextNode(element.Status)
+        status.appendChild(stat)
+        div.appendChild(status)
 
-        localStorage.setItem('todos', JSON.stringify(todos))
-    })
-
-    deletetodo.addEventListener('click', (e) => {
-        let parent = e.target.parentElement
-        let name = parent.firstChild.children[0].children[2].textContent
-        console.log(name);
-        parent.remove()
-        let todos = JSON.parse(localStorage.getItem('todos'));
-        todos = todos.filter(td => td.id != parent.id);
-        localStorage.setItem('todos', JSON.stringify(todos))
-
-    })
-
-    //select event
-    select.addEventListener('change', () => {
-        if (select.value === "doing") {
-
-            if (doingcb.classList.contains("active")) {
-
-                sectionchild.style.display = "block"
-
-
-            } else {
-                sectionchild.style.display = "none"
-            }
-        }
-
-
-        if (select.value === "all") {
-            sectionchild.style.display = "block"
-        }
-
-        if (select.value === "done") {
-
-            if (donecb.classList.contains("clicked")) {
-
-                sectionchild.style.display = "block"
-
-            } else {
-                sectionchild.style.display = "none"
-            }
-        }
-
-
-
-
-
-        if (select.value === "todo") {
-
-            if (!donecb.classList.contains("clicked") & !doingcb.classList.contains('active')) {
-
-                sectionchild.style.display = "block"
-
-            } else {
-                sectionchild.style.display = "none"
-            }
-        }
-
-
-
-
-    })
-
+        let duedate = document.createElement("P")
+        let date = document.createTextNode(element.DueDate)
+        duedate.appendChild(date)
+        div.appendChild(duedate)
+        
+        document.getElementById("tasklist").appendChild(div)
+  }
 }
 
+function getInputValue(event){
+    // Selecting the input element and get its value 
+    event.preventDefault();
+    let NameValue = document.getElementById("NameOfTask").value;
+    let DescValue = document.getElementById("DescOfTask").value;
+    let StatusValue = document.getElementById("StatusOfTask").value;
+    let DateValue = document.getElementById("DateOfTask").value;
+    let endDate = new Date;
+
+    // Calcul des jours restants
+
+    let diffInMs = new Date(DateValue) - new Date(endDate)
+    let diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+    diffInDays = diffInDays | 0
+    diffInDays += " days"
 
 
-const startConf= () => {
-    const todos = JSON.parse(localStorage.getItem('todos'))
-    if (!todos) {
-        localStorage.setItem('todos', JSON.stringify([]))
-    } else {
-
-        for (let elem in todos) {
-            addHtml(todos[elem])
-
-        }
-
+    let input = {
+      Task: NameValue,
+      Description: DescValue,
+      Status: StatusValue,
+      DueDate: diffInDays,
     }
+    collection.push(input)
+    window.localStorage.setItem('collection', JSON.stringify(collection))
+    window.location.reload();
+};
 
-}
-startConf();
-
-
-
-
-let todo;
-
-const createtodo = () => {
-    let todoname = naame.value;
-    let tododesc = description.value;
-    let tododate = date.valueAsNumber;
-    let now = Date.now();
-
-
-
-    let total = tododate - now;
-    let day = Math.ceil(total / 3600 / 24 / 1000)
-    todo = {
-        name: todoname,
-        desc: tododesc,
-        date: date.value,
-
-        doing: false,
-        done: false,
-
-        remainingDate: day,
-        id: Math.floor(Math.random() * 1000000) 
-    }
-    let todos = JSON.parse(localStorage.getItem('todos'));
-    todos.push(todo)
-    localStorage.setItem('todos', JSON.stringify(todos))
-    addHtml(todo)
-naame.value="";
-description.value="";
-date.value=""
+function resetTasks() {
+  window.localStorage.removeItem('collection')
+  window.location.reload();
 }
 
-function sortedbydate() {
-    
-    
-    let stocked = JSON.parse(localStorage.getItem('todos'));
-    console.log(stocked);
-    stocked.sort((a, b)=> {
-        return a.remainingDate - b.remainingDate;
-    });
-    localStorage.setItem('todos', JSON.stringify(stocked))
-    // addHtml(stocked)
-    location.reload()
-    
-    
+function sortName(arr) {
+  let sorted = arr.sort(function (a, b) {
+    return a.Task.localeCompare(b.Task);
+  });
+  if (document.querySelector(".selected")) {
+    document.querySelector(".selected").classList.remove("selected")
+  }
+  nameBtn = document.querySelectorAll(".btn")[0];
+  nameBtn.classList.add("selected")
+  updateTask(sorted)
+  };
+
+
+function sortDate(arr) {
+  let sorted = arr.sort(function (a, b) {
+    return a.DueDate.localeCompare(b.DueDate);
+  });
+  if (document.querySelector(".selected")) {
+    document.querySelector(".selected").classList.remove("selected")
+  }
+  dateBtn = document.querySelectorAll(".btn")[3];
+  dateBtn.classList.add("selected")
+  updateTask(sorted)
+  };
+
+function sortStatus(arr) {
+  let sorted = arr.sort(function (a, b) {
+    return a.Status.localeCompare(b.Status);
+  });
+  if (document.querySelector(".selected")) {
+    document.querySelector(".selected").classList.remove("selected")
+  }
   
-}
+  statusBtn = document.querySelectorAll(".btn")[2];
+  statusBtn.classList.add("selected")
+  updateTask(sorted)
+  updateTask(sorted)
+  };
 
-sortt.addEventListener('click',sortedbydate)
+  function filterSelection(e) {
+    let filt = collection.filter(element => element.Status === e);
+    console.log(filt);
+    updateTask(filt);
+  }
+  
 
+if(collection) {
+  updateTask(collection)
+} else {
+  // initial values
+  collection = [
+     /*{
+      Task: "Laundry",
+      Task: "Laundry",
+      Description: "Clean, Iron & Fold",
+      Description: "Clean, Iron & Fold",
+      Status: "To-Do",
+      Status: "To-Do",
+@@ -101,7 +101,9 @@ if(collection) {
+      Description: "Clean the whole house",
+      Description: "Clean the whole house",
+      Status: "To-Do",
+      Status: "To-Do",
+      DueDate: "4 days",
+      DueDate: "4 days",
+    },
+    },*/
+  ];
+  updateTask(collection, 1)
+};
 
-
-
-
-add.addEventListener('click', createtodo)
-
-document.addEventListener('keyup',(e)=>{
-    if(e.key==="Enter"){
-        createtodo()
-    }
-})
-
-
+// function darkmode() {
+//   let element = document.body;
+//   element.classList.add("dark-mode");
+// } 

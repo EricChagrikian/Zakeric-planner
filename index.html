@@ -4,66 +4,57 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js" defer></script>
     <link rel="stylesheet" href="styles.css">
-    <script  defer src="script.js"></script>
-    <title>Planificateur</title>
-    <!DOCTYPE html>
-    <html lang="en">
-    <body>
-        <h1>project planner</h1>
+    <title>&#128198;Project Planner</title>
+</head>
+<body>
+    <header>
+        <img src="Logo.svg" alt="" class="logo">
+    </header>
     
-    
-        <div class="buttons">
-            <div class="select-box">
-                <select name="" id="select">
-                    <option value="all">all</option>
-                    <option value="todo">todo</option>
-                    <option value="doing">doing</option>
-                    <option value="done">done</option>
-                    
-                </select>
-            </div>
-            <button class="sort">sort</button>
+    <div class="createtask">
+        <form> 
+        <div class="taskname">
+            <label for="name">Nom de la tâche</label>
+            <input type="text" id="NameOfTask">
         </div>
-        <button class="add">Add</button>
-         <table>
-             <tr>
-         <th>Name</th>
-         <th>description</th>
-         <th>date</th>
-         <th>remaining date</th>
-             </tr>
-             
-                 <tr>
-                 <td> 
-             
-        <input type="text" name="name" class="named">
-            </td>
-            
-        <td>
-    
-            <input type="text" name="description" class="description">
-        </td>
-    
-        
-        <td>
-            <input type="date"  min="2022-05-09" max="2024-12-31" class="date">
-            
-        </td>
-    
-        <td><p class="remaining"></p></td>
-        
-    
-        
-        
-    </tr>
-    </table>
-    
-        
-    <section class="container">
-    
-    
-    
-    </section>
-    </body>
-    </html>
+        <div class="taskdesc">
+            <label for="name">Description de la tâche</label>
+            <input type="text" id="DescOfTask">
+        </div>
+        <div class="taskdate">
+            <label for="name">Date</label>
+            <input type="date" id="DateOfTask">
+        </div>
+        <div class="taskstatus">
+            <label for="name">Status</label>
+            <select id="StatusOfTask">
+             <option value="To-Do">To-Do</option>
+             <option value="Doing">Doing</option>
+             <option value="Done">Done</option>
+            </select>
+        </div>
+        <input type="submit" class="submit" value="Ajouter" onclick="getInputValue(event);">
+    </div>
+</form>
+
+    <div id="tasktable">
+        <div id="taskheader">
+            <button class="btn" onclick="sortName(collection)"> Task</button>
+            <button class="btn"> Description</button>
+            <button class="btn" onclick="sortStatus(collection)"> Status</button>
+            <button class="btn" onclick="sortDate(collection)"> Date</button>
+        </div>
+        <div id="tasklist">
+            <div class=""><p>Laundry</p><p>Clean, Iron &amp; Fold</p><p>To-Do</p><p>3 days</p></div>
+            <div class=""><p>Cleaning</p><p>Clean the whole house</p><p>To-Do</p><p>4 days</p></div></div>
+        </div>
+    </div>
+
+    <div id="buttons">
+        <button class="todo" onclick="filterSelection('To-Do')"> Show "to-do" tasks</button>
+        <button class="reinit" onclick="resetTasks()"> Réinitiliaser</button>
+    </div>
+</body>
+</html>
